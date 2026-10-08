@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="PickMe is an AI music class for YouTube creators. We teach music production with Claude, Suno and Higgsfield, and build Claude tools for music work.">
+<title>PickMe AI Music Class</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<style>
+html, body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+/* Layout: a DAW arrangement view. Headline, then a track-lane timeline that maps the whole workflow; each section below expands one region of that session. */
+:root {
+  --bg: #ECEEF1;
+  --surface: #F7F8FA;
+  --fg: #14171C;
+  --muted: #565E6C;
+  --line: #D3D8DF;
+  --line-strong: #B4BCC7;
+  --playhead: #E5484D;
+  --clip-ink: #13161B;
+  --lane-claude: #F3BD5E;
+  --lane-suno: #86D0B5;
+  --lane-daw: #9CB6F2;
+  --lane-video: #D9A6E6;
+  --lane-yt: #F3A0A0;
+  --btn-bg: #14171C;
+  --btn-fg: #F7F8FA;
+  --header-bg: rgba(236, 238, 241, 0.88);
+  --ok: #2E9A68;
+  --wip: #C9821B;
+  --teach: #4A6FD8;
+  --display: "Bricolage Grotesque", "IBM Plex Sans KR", system-ui, sans-serif;
+  --body: "IBM Plex Sans KR", system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --lane-h: 3.4rem;
+  --ruler-h: 1.75rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111317; --surface: #191C21; --fg: #E7EAEE; --muted: #9AA3B0;
+    --line: #2A2F37; --line-strong: #3E4550; --playhead: #FF6369; --clip-ink: #13161B;
+    --lane-claude: #E9B04E; --lane-suno: #74C2A6; --lane-daw: #8DA8E8; --lane-video: #CC97DA; --lane-yt: #E89292;
+    --btn-bg: #E7EAEE; --btn-fg: #111317; --header-bg: rgba(17, 19, 23, 0.86);
+    --ok: #4CC38A; --wip: #F0A93A; --teach: #7C9BF0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111317; --surface: #191C21; --fg: #E7EAEE; --muted: #9AA3B0;
+  --line: #2A2F37; --line-strong: #3E4550; --playhead: #FF6369; --clip-ink: #13161B;
+  --lane-claude: #E9B04E; --lane-suno: #74C2A6; --lane-daw: #8DA8E8; --lane-video: #CC97DA; --lane-yt: #E89292;
+  --btn-bg: #E7EAEE; --btn-fg: #111317; --header-bg: rgba(17, 19, 23, 0.86);
+  --ok: #4CC38A; --wip: #F0A93A; --teach: #7C9BF0;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 1rem/1.65 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+.wrap { max-width: 72rem; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
+
+.c-claude { --c: var(--lane-claude); }
+.c-suno { --c: var(--lane-suno); }
+.c-daw { --c: var(--lane-daw); }
+.c-video { --c: var(--lane-video); }
+.c-yt { --c: var(--lane-yt); }
+
+a:focus-visible, button:focus-visible { outline: 2px solid var(--playhead); outline-offset: 3px; border-radius: 4px; }
+
+/* Header */
+.top {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--header-bg);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.top-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.85rem; }
+.brand { display: flex; align-items: center; gap: 0.55rem; text-decoration: none; font: 700 1.3rem/1 var(--display); letter-spacing: -0.02em; }
+.mark { display: grid; gap: 2px; width: 15px; }
+.mark i { display: block; height: 3px; border-radius: 1px; background: var(--c); }
+.mark i:nth-child(2) { width: 70%; margin-left: 30%; }
+.mark i:nth-child(4) { width: 60%; margin-left: 20%; }
+nav { display: flex; align-items: center; gap: 1.25rem; font: 500 0.875rem/1 var(--body); }
+nav a { text-decoration: none; color: var(--muted); }
+nav a:hover { color: var(--fg); }
+nav a.nav-cta { color: var(--fg); border: 1px solid var(--line-strong); padding: 0.45rem 0.8rem; border-radius: 999px; }
+@media (max-width: 560px) { nav a:not(.nav-cta) { display: none; } }
+
+/* Hero */
+.hero { display: grid; gap: 1.2rem; max-width: 52rem; padding-block: clamp(3rem, 8vw, 5.5rem) 2.25rem; }
+.eyebrow { margin: 0; font: 500 0.75rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+h1 { margin: 0; font: 700 clamp(2.4rem, 6.4vw, 4.7rem)/1.02 var(--display); letter-spacing: -0.035em; text-wrap: balance; }
+.lede { margin: 0; max-width: 40rem; font-size: clamp(1.05rem, 1.6vw, 1.2rem); }
+.kr { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.4rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.15rem; border-radius: 8px; border: 1px solid var(--line-strong);
+  background: transparent; color: var(--fg);
+  font: 500 0.95rem/1 var(--body); text-decoration: none; cursor: pointer;
+}
+.btn:hover { border-color: var(--fg); }
+.btn.primary { background: var(--btn-bg); color: var(--btn-fg); border-color: var(--btn-bg); }
+
+/* Session timeline */
+.session { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden; }
+.session-head, .session-foot { padding: 0.7rem 1rem; }
+.session-head {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1rem;
+  border-bottom: 1px solid var(--line);
+  font: 500 0.72rem/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
+.session-foot { border-top: 1px solid var(--line); display: grid; gap: 0.2rem; font-size: 0.92rem; }
+.session-foot p { margin: 0; }
+.arrange-scroll { overflow-x: auto; }
+.arrange { display: grid; grid-template-columns: 9.75rem minmax(0, 1fr); min-width: 780px; }
+.labels { border-right: 1px solid var(--line); }
+.spacer { height: var(--ruler-h); border-bottom: 1px solid var(--line); }
+.lane-label { height: var(--lane-h); display: flex; align-items: center; gap: 0.6rem; padding-inline: 0.9rem; border-bottom: 1px solid var(--line); }
+.lane-label:last-child { border-bottom: 0; }
+.swatch { flex: none; width: 10px; height: 10px; border-radius: 2px; background: var(--c); }
+.lane-label b { display: block; font: 600 0.85rem/1.2 var(--body); }
+.lane-label small { display: block; font: 400 0.68rem/1.3 var(--mono); color: var(--muted); }
+.tracks { position: relative; }
+.ruler, .lane { display: grid; grid-template-columns: repeat(16, minmax(0, 1fr)); }
+.ruler { height: var(--ruler-h); border-bottom: 1px solid var(--line); font: 500 0.66rem/1 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.ruler span { padding: 0.55rem 0 0 0.3rem; border-left: 1px solid var(--line); }
+.ruler span:nth-child(4n+1) { border-left-color: var(--line-strong); color: var(--fg); }
+.lane {
+  height: var(--lane-h);
+  border-bottom: 1px solid var(--line);
+  background-image: linear-gradient(to right, var(--line) 1px, transparent 1px), linear-gradient(to right, var(--line-strong) 1px, transparent 1px);
+  background-size: calc(100% / 16) 100%, calc(100% / 4) 100%;
+}
+.lane:last-child { border-bottom: 0; }
+.clip {
+  grid-row: 1; min-width: 0; overflow: hidden;
+  margin: 6px 3px; padding: 0.3rem 0.55rem; border-radius: 5px;
+  background: var(--c); color: var(--clip-ink);
+  display: flex; flex-direction: column; justify-content: center; gap: 3px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+.clip span { font: 600 0.74rem/1.2 var(--body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.clip canvas { display: block; width: 100%; height: 12px; color: var(--clip-ink); }
+.notes {
+  height: 9px; opacity: 0.4;
+  background-image: repeating-linear-gradient(90deg, currentColor 0 12px, transparent 12px 18px), repeating-linear-gradient(90deg, currentColor 0 7px, transparent 7px 15px);
+  background-size: 100% 2px, 100% 2px; background-position: 0 1px, 5px 6px; background-repeat: no-repeat;
+}
+.frames { height: 10px; opacity: 0.28; border-radius: 1px; background: repeating-linear-gradient(90deg, currentColor 0 14px, transparent 14px 17px); }
+.playhead { position: absolute; top: 0; bottom: 0; left: 0; width: 0; z-index: 2; pointer-events: none; animation: play 20s linear infinite; animation-delay: -8s; }
+.playhead::before { content: ""; position: absolute; top: 0; bottom: 0; left: -1px; width: 2px; background: var(--playhead); }
+.playhead::after { content: ""; position: absolute; top: 0; left: -6px; border: 6px solid transparent; border-top: 8px solid var(--playhead); }
+@keyframes play { from { left: 0; } to { left: 100%; } }
+@media (prefers-reduced-motion: reduce) { .playhead { animation: none; left: 43.75%; } }
+
+/* Sections */
+.block { padding-block: clamp(3.5rem, 8vw, 5.5rem); border-top: 1px solid var(--line); }
+.first-block { margin-top: clamp(3rem, 7vw, 5rem); }
+.block-head { display: grid; gap: 0.5rem; max-width: 44rem; margin-bottom: 2.25rem; }
+.block-head p { margin: 0; }
+h2 { margin: 0; font: 700 clamp(1.8rem, 3.6vw, 2.6rem)/1.08 var(--display); letter-spacing: -0.025em; text-wrap: balance; }
+h3 { text-wrap: balance; }
+
+/* Workflow steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; }
+.step { display: grid; grid-template-columns: 13rem minmax(0, 1fr); gap: 1.5rem; padding-block: 1.6rem; border-top: 1px solid var(--line); }
+.step:last-child { border-bottom: 1px solid var(--line); }
+.step-meta { display: grid; gap: 0.55rem; align-content: start; }
+.bars { font: 500 0.74rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tools { display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; }
+.tool { display: inline-flex; align-items: center; gap: 0.45rem; font: 600 0.85rem/1.2 var(--body); }
+.tool i { flex: none; width: 10px; height: 10px; border-radius: 2px; background: var(--c); }
+.step-body { min-width: 0; }
+.step h3 { margin: 0 0 0.35rem; font: 650 1.3rem/1.25 var(--display); letter-spacing: -0.01em; }
+.step p { margin: 0; max-width: 40rem; }
+.step .kr { margin-top: 0.45rem; }
+@media (max-width: 640px) { .step { grid-template-columns: 1fr; gap: 0.7rem; } }
+
+/* Tools we build */
+.tools-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.tool-card { min-width: 0; display: grid; gap: 0.6rem; align-content: start; padding: 1.35rem 1.3rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.tool-card h3 { margin: 0; font: 650 1.15rem/1.25 var(--display); }
+.tool-card p { margin: 0; font-size: 0.95rem; }
+.tool-card.wide { grid-column: 1 / -1; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 1.25rem 2.5rem; align-items: start; padding: 1.6rem 1.5rem; border-color: var(--line-strong); }
+.wide-main { display: grid; gap: 0.6rem; min-width: 0; }
+.wide-main h3 { font-size: clamp(1.4rem, 2.6vw, 1.75rem); letter-spacing: -0.02em; }
+.status { display: inline-flex; align-items: center; gap: 0.45rem; width: fit-content; padding: 0.35rem 0.6rem; border: 1px solid var(--line-strong); border-radius: 999px; font: 500 0.7rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--dot); }
+.status.live { --dot: var(--ok); }
+.status.wip { --dot: var(--wip); }
+.status.teach { --dot: var(--teach); }
+.caps { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--line); }
+.caps li { padding-block: 0.7rem; border-bottom: 1px solid var(--line); font: 500 0.85rem/1.35 var(--mono); }
+.caps li span { color: var(--muted); }
+@media (max-width: 820px) {
+  .tools-grid { grid-template-columns: 1fr; }
+  .tool-card.wide { grid-template-columns: 1fr; }
+}
+
+/* Class */
+.class-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.class-grid article { background: var(--surface); padding: 1.4rem 1.3rem; display: grid; gap: 0.45rem; align-content: start; min-width: 0; }
+.class-grid .label { font: 500 0.7rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.class-grid h3 { margin: 0; font: 650 1.15rem/1.25 var(--display); }
+.class-grid p { margin: 0; font-size: 0.95rem; }
+@media (max-width: 820px) { .class-grid { grid-template-columns: 1fr; } }
+.facts { display: flex; flex-wrap: wrap; gap: 0.6rem 2.25rem; margin-top: 1.5rem; font: 500 0.8rem/1.4 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.facts b { color: var(--fg); font-weight: 500; }
+
+/* Studio */
+.studio { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 2rem 3rem; align-items: center; }
+.studio .block-head { margin-bottom: 1.25rem; }
+.chips { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+.chips li { font: 500 0.8rem/1 var(--mono); padding: 0.55rem 0.75rem; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface); }
+.chips .arrow { border: 0; background: none; padding: 0; color: var(--muted); }
+@media (max-width: 760px) { .studio { grid-template-columns: 1fr; } }
+
+/* Contact */
+.email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; }
+.email { font: 500 clamp(1.25rem, 3.4vw, 2rem)/1.2 var(--mono); user-select: all; word-break: break-all; }
+.copy-status { min-height: 1.3em; margin: 0.6rem 0 0; font: 500 0.8rem/1.3 var(--mono); color: var(--muted); }
+
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1rem; padding-block: 2rem 2.5rem; border-top: 1px solid var(--line); font: 400 0.8rem/1.5 var(--mono); color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="#top" aria-label="PickMe home">
+      <span class="mark" aria-hidden="true"><i class="c-claude"></i><i class="c-suno"></i><i class="c-daw"></i><i class="c-video"></i><i class="c-yt"></i></span>
+      PickMe
+    </a>
+    <nav aria-label="Main">
+      <a href="#workflow">Workflow</a>
+      <a href="#tools">Tools</a>
+      <a href="#class">Class</a>
+      <a href="#studio">Studio</a>
+      <a class="nav-cta" href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+  <section class="hero">
+    <p class="eyebrow">AI Music Class · Korea</p>
+    <h1>Make music for YouTube with Claude and Suno.</h1>
+    <p class="lede">PickMe is an AI music class for people building YouTube music channels. Students plan and write songs with Claude, generate tracks in Suno, finish the sound in a DAW, and turn the result into a music video with Higgsfield.</p>
+    <p class="kr">Claude로 기획하고 Suno로 만들고, 힉스필드로 뮤직비디오까지. 유튜브 음악 채널을 위한 AI 뮤직 클래스, 픽미.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="#workflow">See the workflow</a>
+      <a class="btn" href="https://pickme.saacademy.co.kr" target="_blank" rel="noopener">Open PickMe Studio</a>
+    </div>
+  </section>
+
+  <section class="session" aria-label="The production workflow shown as a session timeline">
+    <div class="session-head"><span>Session · one playlist, from idea to upload</span><span>16 bars</span></div>
+    <div class="arrange-scroll">
+      <div class="arrange">
+        <div class="labels">
+          <div class="spacer"></div>
+          <div class="lane-label c-claude"><span class="swatch"></span><span><b>Claude</b><small>write · review · copy</small></span></div>
+          <div class="lane-label c-suno"><span class="swatch"></span><span><b>Suno</b><small>generate</small></span></div>
+          <div class="lane-label c-daw"><span class="swatch"></span><span><b>DAW</b><small>BandLab · Suno Studio</small></span></div>
+          <div class="lane-label c-video"><span class="swatch"></span><span><b>Higgsfield</b><small>video · via MCP</small></span></div>
+          <div class="lane-label c-yt"><span class="swatch"></span><span><b>YouTube</b><small>publish</small></span></div>
+        </div>
+        <div class="tracks">
+          <div class="playhead" aria-hidden="true"></div>
+          <div class="ruler" aria-hidden="true">
+            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
+          </div>
+          <div class="lane">
+            <div class="clip c-claude" style="grid-column: 1 / 5"><span>Concept · lyrics · Suno prompts</span><div class="notes"></div></div>
+            <div class="clip c-claude" style="grid-column: 8 / 11"><span>Arrangement &amp; mix notes</span><div class="notes"></div></div>
+            <div class="clip c-claude" style="grid-column: 14 / 17"><span>Titles · descriptions</span><div class="notes"></div></div>
+          </div>
+          <div class="lane">
+            <div class="clip c-suno" style="grid-column: 4 / 8"><span>15+ tracks per genre</span><canvas class="wave"></canvas></div>
+          </div>
+          <div class="lane">
+            <div class="clip c-daw" style="grid-column: 7 / 12"><span>Edit · mix · master</span><canvas class="wave"></canvas></div>
+          </div>
+          <div class="lane">
+            <div class="clip c-video" style="grid-column: 10 / 15"><span>Lyric music video</span><div class="frames"></div></div>
+          </div>
+          <div class="lane">
+            <div class="clip c-yt" style="grid-column: 14 / 17"><span>Playlist upload</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="session-foot">
+      <p>Claude works on three lanes: it writes before generation, reviews during editing, and writes the copy that goes out with each upload.</p>
+      <p class="kr">Claude는 생성 전 작사·프롬프트, 편집 중 리뷰, 업로드 문구까지 세 구간을 맡습니다.</p>
+    </div>
+  </section>
+
+  <section id="workflow" class="block first-block">
+    <div class="block-head">
+      <h2>How a track gets made</h2>
+      <p class="kr">음원 한 곡이 유튜브에 올라가기까지</p>
+    </div>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-meta">
+          <span class="bars">Bars 1–4</span>
+          <span class="tools"><span class="tool c-claude"><i></i>Claude</span></span>
+        </div>
+        <div class="step-body">
+          <h3>Plan and write</h3>
+          <p>Pick a genre and a channel concept. Claude writes the lyrics, the song structure and the Suno style prompt. Our prompt sets cover more than 30 genres, with 12 to 15 tracks each.</p>
+          <p class="kr">장르와 채널 콘셉트를 정하면 Claude가 가사, 곡 구조, Suno 프롬프트를 씁니다.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-meta">
+          <span class="bars">Bars 4–7</span>
+          <span class="tools"><span class="tool c-suno"><i></i>Suno</span></span>
+        </div>
+        <div class="step-body">
+          <h3>Generate the tracks</h3>
+          <p>Students run Claude's prompts in Suno and learn to pull 15 or more usable tracks from a single genre prompt.</p>
+          <p class="kr">한 장르 프롬프트로 15곡 이상 뽑아내는 법을 배웁니다.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-meta">
+          <span class="bars">Bars 7–11</span>
+          <span class="tools"><span class="tool c-daw"><i></i>BandLab · Suno Studio</span><span class="tool c-claude"><i></i>Claude</span></span>
+        </div>
+        <div class="step-body">
+          <h3>Edit, mix and master</h3>
+          <p>Tracks are finished in a DAW: BandLab for the basics, Suno Studio for advanced work. Claude reviews the arrangement and keeps the mix checklist, and the student makes the final calls by ear.</p>
+          <p class="kr">최종 판단은 사람의 귀로. 휴먼터치 편집과 마스터링까지 다룹니다.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-meta">
+          <span class="bars">Bars 10–14</span>
+          <span class="tools"><span class="tool c-video"><i></i>Higgsfield via MCP</span></span>
+        </div>
+        <div class="step-body">
+          <h3>Make the music video</h3>
+          <p>Claude reads the lyrics, plans the scenes and drives Higgsfield through MCP to produce a lyric-based music video for the track.</p>
+          <p class="kr">Claude가 가사를 읽고 장면을 짠 뒤, MCP로 힉스필드를 움직여 뮤직비디오를 만듭니다.</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="step-meta">
+          <span class="bars">Bars 14–16</span>
+          <span class="tools"><span class="tool c-claude"><i></i>Claude</span><span class="tool c-yt"><i></i>YouTube</span></span>
+        </div>
+        <div class="step-body">
+          <h3>Title it and upload</h3>
+          <p>Claude writes the playlist title, the description and the channel copy from the tracklist. Then the playlist goes up on YouTube.</p>
+          <p class="kr">제목과 설명란은 Claude가 쓰고, 플레이리스트를 유튜브에 올립니다.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="tools" class="block">
+    <div class="block-head">
+      <h2>Tools we build on Claude</h2>
+      <p>We build the Claude tools our classes and our own music channels run on, for teaching and for commercial music work.</p>
+      <p class="kr">수업과 상업 음악 작업에 쓰는 Claude 도구를 직접 만듭니다.</p>
+    </div>
+    <div class="tools-grid">
+      <article class="tool-card wide">
+        <div class="wide-main">
+          <span class="status wip">In development</span>
+          <h3>PickMe MCP</h3>
+          <p>An MCP server that gives Claude direct access to PickMe's music know-how. Students connect it to their own Claude in class, and we use it for client work and our own channels.</p>
+          <p class="kr">픽미의 음악 제작 노하우를 Claude가 바로 꺼내 쓰는 MCP. 수강생은 자기 Claude에 연결해서 쓰고, 상업 작업에도 씁니다.</p>
+        </div>
+        <ul class="caps" aria-label="What PickMe MCP connects Claude to">
+          <li>Genre prompt library <span>· 30+ genres</span></li>
+          <li>Playlist title &amp; description rules</li>
+          <li>Music-video scene plans <span>· for Higgsfield</span></li>
+          <li>Class Q&amp;A search</li>
+        </ul>
+      </article>
+      <article class="tool-card">
+        <span class="status live">In use</span>
+        <h3>Class chat summary</h3>
+        <p>A Claude skill that turns a day of class chat into a summary for the room and new entries for the shared Q&amp;A.</p>
+      </article>
+      <article class="tool-card">
+        <span class="status live">In use</span>
+        <h3>Lecture cut editor</h3>
+        <p>A Claude skill that transcribes long lectures, cuts breaks and off-topic talk, and files student questions separately.</p>
+      </article>
+      <article class="tool-card">
+        <span class="status teach">In class</span>
+        <h3>Claude + MCP for creators</h3>
+        <p>Students learn to connect Claude to creative tools through MCP, starting with Higgsfield for music videos.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="class" class="block">
+    <div class="block-head">
+      <h2>The class</h2>
+      <p>PickMe runs its classes in cohorts. Students build their own channels while they learn and upload as they go.</p>
+      <p class="kr">기수제로 운영하며, 수강생은 배우는 동안 자기 채널을 직접 만들고 운영합니다.</p>
+    </div>
+    <div class="class-grid">
+      <article>
+        <span class="label">정규 과정</span>
+        <h3>Regular course</h3>
+        <p>The full workflow above, from channel concept and Suno prompts to mastering and upload.</p>
+      </article>
+      <article>
+        <span class="label">스파르타반</span>
+        <h3>Sparta class</h3>
+        <p>Students run two channels and submit an upload, a thumbnail and a reference title every day.</p>
+      </article>
+      <article>
+        <span class="label">수강생 지원</span>
+        <h3>Student support</h3>
+        <p>Claude summarizes each day's class chat and turns recurring questions into a shared Q&amp;A built from our course materials.</p>
+      </article>
+    </div>
+    <div class="facts">
+      <span><b>Cohort 3</b> · from Oct 2026</span>
+      <span><b>67 students</b> · Cohort 2 Sparta class</span>
+      <span><b>30+</b> genre prompt sets</span>
+    </div>
+  </section>
+
+  <section id="studio" class="block">
+    <div class="studio">
+      <div>
+        <div class="block-head">
+          <h2>PickMe Studio</h2>
+          <p>Our web app for members. It brings reference analysis, composition, mastering and video prep into one place. Membership is approval-based.</p>
+          <p class="kr">레퍼런스 분석부터 작곡, 마스터링, 영상 준비까지 한곳에서. 승인제 멤버십으로 운영합니다.</p>
+        </div>
+        <a class="btn primary" href="https://pickme.saacademy.co.kr" target="_blank" rel="noopener">Open PickMe Studio</a>
+      </div>
+      <ol class="chips" aria-label="Studio stages">
+        <li>Reference analysis</li><li class="arrow" aria-hidden="true">→</li>
+        <li>Composition</li><li class="arrow" aria-hidden="true">→</li>
+        <li>Mastering</li><li class="arrow" aria-hidden="true">→</li>
+        <li>Video prep</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="contact" class="block">
+    <div class="block-head">
+      <h2>Contact</h2>
+      <p>For classes, partnerships and press.</p>
+      <p class="kr">수강 및 협업 문의</p>
+    </div>
+    <div class="email-row">
+      <span id="email" class="email">hello@pickmestudio.com</span>
+      <button id="copy-email" class="btn" type="button">Copy</button>
+    </div>
+    <p id="copy-status" class="copy-status" aria-live="polite"></p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 PickMe</span>
+    <span>pickmestudio.com</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  function seeded(seed) {
+    var s = seed;
+    return function () { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+  }
+  function drawWaves() {
+    var canvases = document.querySelectorAll("canvas.wave");
+    for (var i = 0; i < canvases.length; i++) {
+      var cv = canvases[i];
+      var w = cv.clientWidth, h = cv.clientHeight;
+      if (!w || !h) continue;
+      var dpr = window.devicePixelRatio || 1;
+      cv.width = Math.round(w * dpr);
+      cv.height = Math.round(h * dpr);
+      var ctx = cv.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = getComputedStyle(cv).color;
+      ctx.globalAlpha = 0.5;
+      var rnd = seeded(17 + i * 31), step = 3, n = Math.floor(w / step);
+      for (var x = 0; x < n; x++) {
+        var env = Math.sin(Math.PI * x / n) * 0.6 + 0.4;
+        var bh = Math.max(1, (0.25 + rnd() * 0.75) * env * h);
+        ctx.fillRect(x * step, (h - bh) / 2, 2, bh);
+      }
+    }
+  }
+  drawWaves();
+  var timer;
+  window.addEventListener("resize", function () { clearTimeout(timer); timer = setTimeout(drawWaves, 120); });
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(drawWaves); }
+
+  var btn = document.getElementById("copy-email");
+  var status = document.getElementById("copy-status");
+  var email = document.getElementById("email");
+  function selectEmail() {
+    var range = document.createRange();
+    range.selectNodeContents(email);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    status.textContent = "Selected. Press Ctrl+C or ⌘C to copy.";
+  }
+  btn.addEventListener("click", function () {
+    var text = email.textContent.trim();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { status.textContent = "Copied"; }, selectEmail);
+    } else {
+      selectEmail();
+    }
+  });
+})();
+</script>
+</body>
+</html>
