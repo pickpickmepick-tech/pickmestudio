@@ -1,0 +1,243 @@
+{
+  "daily": {
+    "updatedAt": "2026-10-13 기준",
+    "items": [
+      {
+        "rank": 1,
+        "prevRank": 2,
+        "title": "GOGO (꺾어)",
+        "artist": "YOUNGTAK",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/WQJXT3QRUQeIr6gSmhCiAk94vXVcmAKjU4k5HGNaZhDHAz8W4ceU4syXaihcBsSVJGeNv-0Zwkcr0S0=w180-h180-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2026년 9월 14일",
+        "composer": "YOUNGTAK & JI KWANGMIN",
+        "shortsSourceUrl": "https://www.youtube.com/source/Ak1cg1ex0NY/shorts"
+      },
+      {
+        "rank": 2,
+        "prevRank": 1,
+        "title": "퇴사할게여",
+        "artist": "SOYEON",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/-evTfg9Dho5GU39Kw98B-7VuaGHIFSReaafijbIFU6ktxxz4GGtNr1epcGnnvzMTBKiCnjUrNTP1mb-F=w180-h180-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2026년 9월 7일",
+        "composer": "SOYEON & Pop Time & Daily & Likey",
+        "shortsSourceUrl": "https://www.youtube.com/source/7mDDM0eBWR0/shorts"
+      },
+      {
+        "rank": 3,
+        "prevRank": 3,
+        "title": "blue",
+        "artist": "yung kai",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/jTa7GXscGZnmzWZDYYpmvYRy_gYGZQSP_COxCY-7wDt_7HTs37Bi-O313LdKc5qs2tuIVZNv0SGf-Jue=w180-h180-l90-rj",
+        "moodTags": [
+          "잔잔",
+          "감성"
+        ],
+        "releaseDate": "2024년 8월 2일",
+        "composer": "yung kai",
+        "producer": "yung kai",
+        "shortsSourceUrl": "https://www.youtube.com/source/IpFX2vq8HKw/shorts"
+      },
+      {
+        "rank": 4,
+        "prevRank": 4,
+        "title": "꿈꾸던 어른이 되었나요?",
+        "artist": "MEOMURU",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/lNOryqmyqEA6mK1YzJJY2cRvTGFRU7fdma_s_krdREDlZm18Dlgeb8cJ1OaLdSvOYCeE-jkwlTXzJj93=w180-h180-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2026년 6월 23일",
+        "composer": "머무르",
+        "shortsSourceUrl": "https://www.youtube.com/source/GxChUrrY4bc/shorts"
+      },
+      {
+        "rank": 5,
+        "prevRank": 6,
+        "title": "강아지의 달콤한 꿈",
+        "artist": "강아지의 하루",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/TXwmsofyvfdgjaJXPCrbvYrjpbZWWSKSz15Om0hEfHQPqoPtQkZRvw5tKWA1HoNVq7fkO_gUT4FlM64=w180-h180-l90-rj",
+        "moodTags": [
+          "잔잔",
+          "감성"
+        ],
+        "releaseDate": "2021년 12월 24일",
+        "shortsSourceUrl": "https://www.youtube.com/source/E7V6IG6c4lw/shorts"
+      },
+      {
+        "rank": 6,
+        "prevRank": null,
+        "title": "Star Trace",
+        "artist": "PLAVE",
+        "thumbnailUrl": "https://i.ytimg.com/vi/ObF5OzK-_5k/default.jpg",
+        "moodTags": [],
+        "releaseDate": "2026년 10월 7일",
+        "shortsSourceUrl": "https://www.youtube.com/source/ObF5OzK-_5k/shorts"
+      },
+      {
+        "rank": 7,
+        "prevRank": 4,
+        "title": "마음의 숲",
+        "artist": "조선힙합",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/E8sA-U-079AMOCUHpbftCjmeefhKP7TrnwlakXxdICu3Pl3-sDSzUtOZ78sCp-vN2gxSf8y0KRFEjc8=w180-h180-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2026년 4월 9일",
+        "composer": "이호용",
+        "shortsSourceUrl": "https://www.youtube.com/source/XPUOHpkRAxg/shorts"
+      },
+      {
+        "rank": 8,
+        "prevRank": 6,
+        "title": "연애의 조건",
+        "artist": "BESTie(베스티)",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/e_KhStFaUpXtdfyncHtYOBGibpgdw3fVixG8H0_E8aIW6G0Op9wo4jQqWsfHCEMaI96DnhsqlHM9Yzck=w180-h180-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2013년 10월 17일",
+        "shortsSourceUrl": "https://www.youtube.com/source/NPqtL1dtrlA/shorts"
+      },
+      {
+        "rank": 9,
+        "prevRank": 8,
+        "title": "Cool ( That Or That ) (Best Part Looped + Viral Version)",
+        "artist": "easethepain",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/lZT2PyexHCdBkkvftyxAIcidfnJujFBGShYjxLOwpuL2glhkTp3T7uno0EaT_EECXp-8Gq2d4tnr9ZY=w180-h180-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2026년 7월 24일",
+        "composer": "Spencer Hill",
+        "shortsSourceUrl": "https://www.youtube.com/source/kIGaM8mpwWw/shorts"
+      },
+      {
+        "rank": 10,
+        "prevRank": 10,
+        "title": "[Ultimate!Challenge!!] PLAYYY (prod.Zzindda)",
+        "artist": "Waeyossaem(Jiyunjeong)",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/OzWziWdGk4uD6T0VvoT4N9gEBQPgLu_vSAeIzSL0ww_p5TKT_S5GSwodcNq7XWJYhZUq6B1WROSxYwE_VQ=w180-h180-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2026년 9월 1일",
+        "composer": "Zzindda",
+        "shortsSourceUrl": "https://www.youtube.com/source/niwuAGFY0pE/shorts"
+      }
+    ]
+  },
+  "weekly": {
+    "updatedAt": "2026.10.02–10.08",
+    "items": [
+      {
+        "rank": 1,
+        "prevRank": 1,
+        "title": "퇴사할게여",
+        "artist": "SOYEON",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/-evTfg9Dho5GU39Kw98B-7VuaGHIFSReaafijbIFU6ktxxz4GGtNr1epcGnnvzMTBKiCnjUrNTP1mb-F=w180-h180-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2026년 9월 7일",
+        "composer": "SOYEON & Pop Time & Daily & Likey",
+        "shortsSourceUrl": "https://www.youtube.com/source/7mDDM0eBWR0/shorts"
+      },
+      {
+        "rank": 2,
+        "prevRank": 3,
+        "title": "blue",
+        "artist": "yung kai",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/jTa7GXscGZnmzWZDYYpmvYRy_gYGZQSP_COxCY-7wDt_7HTs37Bi-O313LdKc5qs2tuIVZNv0SGf-Jue=w180-h180-l90-rj",
+        "moodTags": [
+          "잔잔",
+          "감성"
+        ],
+        "releaseDate": "2024년 8월 2일",
+        "composer": "yung kai",
+        "producer": "yung kai",
+        "shortsSourceUrl": "https://www.youtube.com/source/IpFX2vq8HKw/shorts"
+      },
+      {
+        "rank": 3,
+        "prevRank": 4,
+        "title": "강아지의 달콤한 꿈",
+        "artist": "강아지의 하루",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/TXwmsofyvfdgjaJXPCrbvYrjpbZWWSKSz15Om0hEfHQPqoPtQkZRvw5tKWA1HoNVq7fkO_gUT4FlM64=w180-h180-l90-rj",
+        "moodTags": [
+          "잔잔",
+          "감성"
+        ],
+        "releaseDate": "2021년 12월 24일",
+        "shortsSourceUrl": "https://www.youtube.com/source/E7V6IG6c4lw/shorts"
+      },
+      {
+        "rank": 4,
+        "prevRank": 5,
+        "title": "Cool ( That Or That ) (Best Part Looped + Viral Version)",
+        "artist": "easethepain",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/lZT2PyexHCdBkkvftyxAIcidfnJujFBGShYjxLOwpuL2glhkTp3T7uno0EaT_EECXp-8Gq2d4tnr9ZY=w180-h180-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2026년 7월 24일",
+        "composer": "Spencer Hill",
+        "shortsSourceUrl": "https://www.youtube.com/source/kIGaM8mpwWw/shorts"
+      },
+      {
+        "rank": 5,
+        "prevRank": 2,
+        "title": "연애의 조건",
+        "artist": "BESTie(베스티)",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/e_KhStFaUpXtdfyncHtYOBGibpgdw3fVixG8H0_E8aIW6G0Op9wo4jQqWsfHCEMaI96DnhsqlHM9Yzck=w180-h180-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2013년 10월 17일",
+        "shortsSourceUrl": "https://www.youtube.com/source/NPqtL1dtrlA/shorts"
+      },
+      {
+        "rank": 6,
+        "prevRank": 6,
+        "title": "마음의 숲",
+        "artist": "조선힙합",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/E8sA-U-079AMOCUHpbftCjmeefhKP7TrnwlakXxdICu3Pl3-sDSzUtOZ78sCp-vN2gxSf8y0KRFEjc8=w180-h180-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2026년 4월 9일",
+        "composer": "이호용",
+        "shortsSourceUrl": "https://www.youtube.com/source/XPUOHpkRAxg/shorts"
+      },
+      {
+        "rank": 7,
+        "prevRank": 7,
+        "title": "Pretty Girl",
+        "artist": "RESCENE",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/mJmC0SCSdDcKBWAH-XoWecJOoEamfDZEtaqbWCK3c5w68fM1tCEKHVLKYRXh7bNAHqP_tYriJCRrpND3dQ=w180-h180-l90-rj",
+        "moodTags": [
+          "신남"
+        ],
+        "releaseDate": "2026년 7월 8일",
+        "composer": "Song Soo Yoon & Han Jae Ho & Kim Seung Soo",
+        "shortsSourceUrl": "https://www.youtube.com/source/qZlu2j2SiBA/shorts"
+      },
+      {
+        "rank": 8,
+        "prevRank": 8,
+        "title": "Retro",
+        "artist": "Wayne Jones",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/dbD1HuQYPZK0zJJTyVjELLXN1CQ5H8z33Z9TalAIPpFO28pQm7PIuH8nPOA-ORdkbxs0H1uutaU7gp4=w180-h180-s-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2018년 6월 27일",
+        "shortsSourceUrl": "https://www.youtube.com/source/jiTY4ox6EnE/shorts"
+      },
+      {
+        "rank": 9,
+        "prevRank": null,
+        "title": "GOGO (꺾어)",
+        "artist": "YOUNGTAK",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/WQJXT3QRUQeIr6gSmhCiAk94vXVcmAKjU4k5HGNaZhDHAz8W4ceU4syXaihcBsSVJGeNv-0Zwkcr0S0=w180-h180-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2026년 9월 14일",
+        "composer": "YOUNGTAK & JI KWANGMIN",
+        "shortsSourceUrl": "https://www.youtube.com/source/Ak1cg1ex0NY/shorts"
+      },
+      {
+        "rank": 10,
+        "prevRank": 9,
+        "title": "BAD",
+        "artist": "ATEEZ",
+        "thumbnailUrl": "https://yt3.googleusercontent.com/OlsyF8L82chwdoVqON-g5H3BsEEgA0zSIYU_6SIZgMtLe0QzZPxzno91C6zJktuon6rjAv_UbmggkO_vyQ=w180-h180-l90-rj",
+        "moodTags": [],
+        "releaseDate": "2026년 5월 22일",
+        "composer": "EDEN & Maddox & Peperoni & Oliv & Jordan Shaw & Eljay & Hongjoong Kim & Mingi Song & Joe Harvey & Jack Harvey",
+        "producer": "EDEN",
+        "shortsSourceUrl": "https://www.youtube.com/source/-q_S27LbNKU/shorts"
+      }
+    ]
+  }
+}
